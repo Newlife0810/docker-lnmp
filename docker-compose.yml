@@ -1,7 +1,7 @@
 version: '3'
 services:
   nginx:
-    build: ./nginx
+    image: newlife0810/dockerlnmp_nginx 
     depends_on:
       - php
     ports: 
@@ -19,7 +19,7 @@ services:
     container_name: nginx
 
   php:
-    build: ./php
+    image: newlife0810/dockerlnmp_php 
     volumes:
       - ./nginx/www:/var/www/html
       - ./php/config/php.ini:/usr/local/etc/php/php.ini
@@ -32,12 +32,12 @@ services:
     container_name: php
 
   mysql:
-    build: ./mysql
+    image: newlife0810/dockerlnmp_mysql
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/my.cnf:/etc/my.cnf
+      - ./data/mysql:/var/lib/mysql
+      - ./data/mysql/my.cnf:/etc/my.cnf
     environment:
       MYSQL_ROOT_PASSWORD: 123456
     networks:
@@ -46,7 +46,7 @@ services:
     container_name: mysql
 
   redis:
-    build: ./redis
+    image: newlife0810/dockerlnmp_redis
     ports:
       - "6379:6379"
     volumes:
